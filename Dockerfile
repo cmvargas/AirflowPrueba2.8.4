@@ -46,6 +46,7 @@ RUN apt-get update \
     && ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc-dev
 ## codigo odbc
 
+USER airflow
 
 ENV PIP_USER=false
 RUN cd /usr/local/lib \ 
