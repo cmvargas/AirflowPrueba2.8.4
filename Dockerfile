@@ -1,6 +1,7 @@
 FROM apache/airflow:2.8.4
 ENV PYTHON_VERSION=3.11.0
 USER root
+#RUN useradd -m -s /bin/bash airflow1 && echo 'airflow1:1234' | chpasswd && adduser airflow1 sudo
 
 
 RUN apt-get update && apt-get -y install libpq-dev gcc
@@ -55,3 +56,8 @@ RUN cd /usr/local/lib \
     && cd /opt/airflow \ 
     &&  /opt/airflow/porttracker_venv/bin/pip install --upgrade pip \ 
     && /opt/airflow/porttracker_venv/bin/pip install -r ./requirements.txt
+
+WORKDIR /home/airflow
+COPY  ./bashrc ./.bashrc
+CMD ["bash"]
+WORKDIR /opt/airflow
